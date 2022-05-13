@@ -48,7 +48,7 @@ const TryGuessWeather = () => {
         setCities(citiesList);
         setAnswersList([]);
     };
-    console.log(answersList)
+    
     return (
         <>
             {answersList.length < 5 
