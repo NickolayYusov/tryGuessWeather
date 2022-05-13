@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import {
+    Input, 
+    Button,
+    CityName,
+    QuestionWrapper,
+} from './styled';
 
 const City = ({ city, onHandleSetAnswer, onClickCallback }) => {
     const [inputValue, setInputValue] = useState('');
@@ -19,11 +25,11 @@ const City = ({ city, onHandleSetAnswer, onClickCallback }) => {
     };
 
     return (
-        <div>
-            <div>{city}</div>
-            <input type="number" value={inputValue} onChange={onHandleChange}/>
-            <button onClick={handleClick}>Guess</button>
-        </div>        
+        <QuestionWrapper>
+            <CityName>{city}</CityName>
+            <Input type="number" value={inputValue} placeholder={'try...'} onChange={onHandleChange}/>
+            <Button onClick={handleClick} children={'Guess'}></Button>   
+        </QuestionWrapper>        
     );
 };
 

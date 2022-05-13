@@ -1,11 +1,11 @@
-import './App.css';
 import TryGuessWeather from './components/tryGuessWeather/TryGuessWeather';
+import { AppWrapper } from './styled';
 
 const App = () => {
   return (
-    <div className="App">
+    <AppWrapper>
       <TryGuessWeather/>
-    </div>
+    </AppWrapper>
   );
 }
 

@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import City from './components/city/City';
+import Answer from './components/answer/Answer';
+import Result from './components/result/Result';
 import { API_KEY, citiesList } from './constants';
 import axios from 'axios';
+import { 
+    AnswersWrapper,
+    QuestionsWrapper,
+    QuestionsAndAnswersBlock,
+    QuestionsAndAnswersTitle,
+} from './styled';
 
 const TryGuessWeather = () => {
     const [result, setResult] = useState(0);
@@ -25,8 +33,8 @@ const TryGuessWeather = () => {
                     }
                 ]);
 
-                if ((Math.abs(userTemp) -  Math.abs(response?.data.main.temp)) <= 5) {
-                    setResult(prev => prev + 1);
+                if (Math.abs(userTemp - response?.data.main.temp) <= 5) {
+                        setResult(prev => prev + 1);
                 }
             });
 
@@ -44,42 +52,36 @@ const TryGuessWeather = () => {
     return (
         <>
             {answersList.length < 5 
-            ? <div>
-                    <>
-                        {cities.length
-                            ? cities.map((city, index) => (
-                                <City 
-                                    key={city + index}
-                                    city={city}
-                                    onClickCallback={() => handleClick(city)}
-                                    onHandleSetAnswer={handleSetAnswer}
-                                />
-                            ))
-                            : null
-                        }
-                        <div>
-                            {answersList.length
-                                ? answersList.map(({ city, userTemp, currentTemp }) => (
-                                    <div key={city + currentTemp}>
-                                        <div>{city}</div>
-                                        <div>{userTemp}</div>
-                                        <div>{currentTemp}</div>
-                                    </div>
-                                ))
-                                : null
-                            }
-                        </div>
-                    </>
-                </div>
-            : result > 3 
-                ? <div>
-                    <p>Win</p>
-                    <button onClick={handleRestartGame}>Restart game</button>
-                </div>
-                : <div>
-                    <p>Lose</p>
-                    <button onClick={handleRestartGame}>Restart game</button>
-                </div>
+            ? <QuestionsAndAnswersBlock>
+                <QuestionsAndAnswersTitle children={'Try to guess the weather in cities'}/>
+                <QuestionsWrapper>
+                    {cities.length
+                        ? cities.map((city, index) => (
+                            <City 
+                                key={city + index}
+                                city={city}
+                                onClickCallback={() => handleClick(city)}
+                                onHandleSetAnswer={handleSetAnswer}
+                            />
+                        ))
+                        : null
+                    }
+                </QuestionsWrapper>                    
+                <AnswersWrapper>
+                    {answersList.length
+                        ? answersList.map(({ city, userTemp, currentTemp }) => (
+                            <Answer 
+                                key={city + currentTemp}
+                                city={city}
+                                userTemp={userTemp}
+                                currentTemp={currentTemp}
+                            />
+                        ))
+                        : null
+                    }
+                </AnswersWrapper>                    
+            </QuestionsAndAnswersBlock>
+            : <Result onCallback={handleRestartGame} children={result >= 3 ? 'Won' : 'Lose'}/>    
             }
         </>
     );
