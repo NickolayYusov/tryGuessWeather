@@ -17,4 +17,5 @@ export const ResultButton = styled.button`
     background: black;
     color: white;
     margin: 3px;
+    cursor: poiner;
 `;
