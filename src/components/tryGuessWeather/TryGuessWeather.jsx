@@ -46,7 +46,7 @@ const TryGuessWeather = () => {
     const handleRestartGame = () => {
         setResult(0);
         setCities(citiesList);
-        setAnswersList([]);
+        setAnswersList([answersList]);
     };
     
     return (
@@ -81,7 +81,10 @@ const TryGuessWeather = () => {
                     }
                 </AnswersWrapper>                    
             </QuestionsAndAnswersBlock>
-            : <Result onCallback={handleRestartGame} children={result >= 3 ? 'Won' : 'Lose'}/>    
+            : <Result 
+                children={result >= 3 ? 'Won' : 'Lose'}
+                onCallback={handleRestartGame}
+             />    
             }
         </>
     );

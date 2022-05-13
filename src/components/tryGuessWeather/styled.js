@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const AnswersWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 10px;
 `;
 export const QuestionsWrapper = styled.div`
 
