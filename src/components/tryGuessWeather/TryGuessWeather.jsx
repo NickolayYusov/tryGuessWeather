@@ -46,9 +46,9 @@ const TryGuessWeather = () => {
     const handleRestartGame = () => {
         setResult(0);
         setCities(citiesList);
-        setAnswersList([answersList]);
+        setAnswersList([]);
     };
-    
+    console.log(answersList)
     return (
         <>
             {answersList.length < 5 
